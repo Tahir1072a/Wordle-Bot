@@ -54,22 +54,34 @@
         * `Alt Görev/Detay: Kullanıcının kayıtlı olup olmadığı kontrolü yapılacaktır. Kayıtlı ise uygulamaya girişi sağlanacaktır.`
         * `Alt Görev/Detay: Kullanıcı hatalı bir giriş yaptığında ilgili hata mesajı, kullanıcı ekranına bastırılacaktır. `
     * **Özellik 3:** Kullanıcı Arayüz İşlemleri (Anasayfa)
-        * `Alt Görev/Detay: Kullanıcı uygulamaya başarılı bir şekilde giriş yaptığında, yönlendirileceği uygulama anasayfası tasarlanacaktır. Anasayfada Oyna ve Çıkış butonları olacaktır.`
+        * `Alt Görev/Detay: Kullanıcı uygulamaya başarılı bir şekilde giriş yaptığında, yönlendirileceği uygulama anasayfası tasarlanacaktır. Anasayfada Oyna, Bot Oynasın ve Çıkış butonları olacaktır.`
         * `Alt Görev/Detay: Kullanıcı bu anasayfa üzerinden oturumunu sonlandırabilecektir.`
         * `Alt Görev/Detay: Kullanıcı oyna butonu içerisinden direkt uygulamaya yönlendirme yapılacaktır. `
+        * `Alt Görev/Detay: Bot oynasın butonu seçilirse, kontrol bota geçecek ve oyunu oynamaya başlayacak. `
 
 * **B. Wordle Oyun Motorunu Geliştirmek**
     * **Özellik 4:** Wordle arayüzünün oluşturulması
         * `Alt görev/detay: 5 sutün, 6 satırdan oluşan bir grid (ızgara) oluşturulacak. Kullacını grid içerisine klavye üzerinden kelime girebilecek. Enter tuşuna bastığında ise kelime kontrol için ilgili işleve gönderilecek.`
         * `Alt görev/detay: Botun önerdiği ilk 10 kelime ve kelimelerin içerdiği bilgi teorisine dayalı skorları kullanıcıya grid'in yanında gösterilecektir. Her yeni kelime tahmininde burası güncellenecek şekilde dinamik olması gerekiyor.`
         * `Alt görev/detay: Girilen kelime, oyun için izin verilen kelimeler arasında var mı diye kontrol edilecek. Ona göre hata/başarı mesajı gönderilecek`
-        * `Alt görev/detay: Aranan kelimeye göre, harflerin konumuyla ilgili kullanıcıya geri bildirim yapılacak. (Konumu doğru ise: yeşil, konumu yanlış ise: sarı, hiçbir konumda yoksa: gri) rengini alacak şekilde grid kutucukları güncellenecek.`
         * `Alt görev/detay: 6 denemede kullanıcı kelimeye ulaşamazsa, ekrana başarısız mesajı basılacak ve doğru kelime gösterilecek. Kullanıcı anasayfaya geri yönlendirilecek.`
+    * **Özellik 5:** Wordle oyunun mantığının oluşturulması
+        * `Alt görev/detay: Aranan kelimeye göre, harflerin konumuyla ilgili kullanıcıya geri bildirim yapılacak. (Konumu doğru ise: yeşil, konumu yanlış ise: sarı, hiçbir konumda yoksa: gri) rengini alacak şekilde grid kutucukları güncellenecek.`
         * `Alt görev/detay: Her oyun sonu kullanıcıya ait istatistikler (kaç tahminde buldu, kazandı/kaybetti vb.) veritabanına kaydedilecek.`
+        * `Alt görev/detay: Oyna butonuna basıldığında, kelime havuzun rastgele bir kelime aranana kelime olarak seçilecek.`
 
 * **C. Wordle Bot Geliştirmek**
-  * **Özellik 5:** Wordle Bot Algortiması
-    * `Alt görev/detay: sadasf`
+  * **Özellik 6:** Wordle Bot Algortiması
+    * `Alt görev/detay: Kelimelerin içerdiği bilgi miktarını hesaplayan bir mekanizma geliştirilecek. En yüksek bilgi miktarına sahip 10 kelimeyi ve bilgi miktarını bize vermesi gerekiyor.`
+    * `Alt görev/detay: Bot, kelime yazıldıktan sonra harflerin rengine göre, elindeki kelime havuzunu filtreleyebilmesi gerekiyor.`
+    * `Alt görev/detay: Botun kendi kendine arayüz ile etkileşime girip oynayabilmesini istiyorum. Oyuncu bot oynasın modunu seçtikten sonra, bot kelimeleri ekrana girebileceği, bir mekanizma geliştirilmesi lazım. Kullanıcı bu işlemi durdurana kadar tekrar eden sonsuz bir döngü.`
+   
+* **D. Diğer işlevler**
+  * **Özellik 7:** Kullanıcı İstatistikleri
+    * `Alt görev/detay: Kullanıcı oyun istatistiklerini görebileceği bir GUI ekranı tasarlanacak`
+    * `Alt görev/detay: Kullanıcı anasayfadan oyun istatistiklerine ulaşabilecek. Oyun ile ilgili pasta grafiği vb. grafikler ile kullanıcıya güzel bir sunum yapılacak.`
+  * **Özellik 8:** Helper Modülü
+    * `Alt görev/detay: İnternet üzerinden kelime havuzu çekip, veritabanına kaydetme işlemleri helper modülü tarafından gerçekleştirilecek. Bu modül oyun kurulumu için gerekli konfigürasyonları içeren bir bileşen olarak kodlanması gerekiyor.`
 
 ---
 
@@ -77,21 +89,22 @@
 * **4.1. Genel Arayüz Yaklaşımı:**
     * `Uygulama genel olarak modern, minimalist ve kullanıcı dostu bir tasarıma sahip olacak. Wordle oyununun bilinen renk paletine (yeşil, sarı, gri) sadık kalınacak, bununla birlikte uygulamanın ana teması için sakin ve göz yormayan bir ana renk (örneğin, koyu mavi veya modern bir gri tonu) kullanılabilir. Odak noktası, oyun deneyiminin akıcı ve anlaşılır olmasıdır.`
 * **4.2. Ana Ekranlar/Pencereler:**
-    * `[Uygulamanızda olması muhtemel ana ekranları veya pencereleri listeleyin. Her birinin temel işlevi ne olacak? Örneğin: Ana Pencere, Ayarlar Penceresi, Veri Giriş Formu vb.]`
-    * `[Eğer varsa, basit çizimler veya wireframe fikirlerinizi buraya not alabilirsiniz.]`
-* **4.3. Kullanıcı Etkileşimleri:**
-    * `[Kullanıcı uygulamayla nasıl etkileşim kuracak? Düğmeler, menüler, sürükle-bırak vb.?]`
+    * `Giriş Ekranı: Oyuna giriş yapmak, kayıt olmak için kullanılacak pencere bu olacaktır.`
+    * `Ana Ekran: Oyuna giriş yapıldıktan sonra kullanıcının yönlendirileceği bir pencere olacaktır. Buradan kullanıcı oyun istatistiklerini görüntüleyebilecek, oyuna başlayabilecek, çıkış yapabilecek veyahut bot oynasın seçeneğine tıklayabilecektir.`
+    * `Oyun Ekranı: Burada grid yapısı ile kulalnıcın harfleri girebileceği oyun ekranı karşımıza gelecektir. Ayrıca kullanıcı bu ekranda botun önerdiği kelime listesini de görebilecek.`
+    * `İstatistik Ekranı: Kullanıcın genel bilgilerini ve oynadığı oyun istatistiklerini görüntüleyebildiği ekran olacaktır.`
 
 ---
 
 **5. Teknik Detaylar**
 * **5.1. Programlama Dili ve Ana Kütüphaneler/Frameworkler:**
-    * **Dil:** Python (`[Python versiyonu, örn: 3.10+]`)
-    * **Masaüstü Uygulama Çerçevesi:** `[Örn: Tkinter, PyQt5/6, Kivy, Flet, CustomTkinter vb. Neden bu seçimi yaptığınızı kısaca belirtin.]`
-    * **Kullanılacak Diğer Önemli Python Kütüphaneleri:** `[Örn: pandas (veri işleme), matplotlib (grafik), requests (API), Pillow (görsel işleme) vb.]`
+    * **Dil:** Python (3.9+)
+    * **Masaüstü Uygulama Çerçevesi:** PyQT5
+         * *Seçim Gerekçesi*: PyQt5, hem güçlü bir GUI çerçevesi sunması, hem de profesyonel uygulamalar için endüstri standardı olması nedeniyle seçilmiştir. Geniş dokümantasyonu ve topluluğu bulunması, geliştiriciye zengin kaynak sağlar.
+    * **Kullanılacak Diğer Önemli Python Kütüphaneleri:** NumPy/Pandas: İstatistik ve veri yönetimi için ve smtplib: Mail gönderme işlemleri için
 * **5.2. Veritabanı:**
     * **Veritabanı Sistemi:** MySQL
-    * **Bağlantı Kütüphanesi:** `[Örn: mysql.connector, PyMySQL vb.]`
+    * **Bağlantı Kütüphanesi:** mysql.connector
     * **Temel Veritabanı Şeması Fikirleri:**
         * **Tablo 1: `[Tablo Adı (örn: Kullanicilar)]`**
             * `[Sütun Adı 1 (örn: id)]`: `[Veri Tipi (örn: INT, PRIMARY KEY, AUTO_INCREMENT)]`
@@ -103,47 +116,150 @@
             * `...`
         * `[Tablolar arası ilişkileri (foreign keys) burada belirtebilirsiniz.]`
 * **5.3. Geliştirme Araçları ve Ortamı:**
-    * **IDE/Kod Editörü:** `[Örn: VS Code, PyCharm, Sublime Text]`
+    * **IDE/Kod Editörü:** PyCharm
     * **Versiyon Kontrol Sistemi:** Git / GitHub
     * **Proje Yönetimi Aracı:** GitHub Projects
-    * **Sanal Ortam Yönetimi:** `[Örn: venv, conda]`
-    * **İşletim Sistemi:** `[Geliştirme yapacağınız işletim sistemi]`
+    * **Sanal Ortam Yönetimi:** Conda
+    * **İşletim Sistemi:** Windows
 
 ---
 
-**6. Proje Yapısı ve Mimarisi (Ön Fikirler)**
+**6. Proje Yapısı ve Mimarisi **
 * **6.1. Klasör Yapısı:**
-    * `[Proje dosyalarınızı nasıl bir klasör yapısında organize etmeyi düşünüyorsunuz? Örneğin: /src, /data, /tests, /docs, /ui_files vb.]`
-* **6.2. Mimari Yaklaşım (İsteğe Bağlı):**
-    * `[Eğer düşünüyorsanız, MVC, MVVM gibi bir mimari desen kullanacak mısınız? Ya da daha basit bir modüler yapı mı hedefliyorsunuz?]`
+   * wordle_bot/
 
----
+│
 
-**7. Geliştirme Aşamaları / İterasyonlar (GitHub Projenizdeki Sütunlar/Sprintler İçin)**
-* `[Projeyi hangi mantıksal aşamalara veya iterasyonlara bölmeyi planlıyorsunuz? Her aşamanın sonunda ne gibi bir çıktı/demo hedefleniyor?]`
-    * **Aşama 1: Temel Kurulum ve Ana Arayüz**
-        * `[Hedefler: Proje iskeletinin oluşturulması, veritabanı bağlantısının sağlanması, ana pencerenin tasarlanması.]`
-        * `[Bu aşamaya dahil olacak özellikler/görevler (Bkz. Madde 3)]`
-    * **Aşama 2: `[Aşama Adı (örn: Kullanıcı Yönetimi Özellikleri)]`**
-        * `[Hedefler]`
-        * `[Bu aşamaya dahil olacak özellikler/görevler]`
-    * **Aşama 3: `[Aşama Adı (örn: Temel Veri İşleme Fonksiyonları)]`**
-        * `[Hedefler]`
-        * `[Bu aşamaya dahil olacak özellikler/görevler]`
-    * `... (Gerektiği kadar aşama ekleyin)`
+├── src/                        # Kaynak kod ana dizini
 
----
+│   ├── main.py                 # Uygulama giriş noktası
 
-**8. Potansiyel Zorluklar ve Riskler**
-* `[Proje geliştirme sürecinde karşılaşabileceğinizi düşündüğünüz olası zorluklar, riskler ve bunlara karşı alabileceğiniz önlemler veya çözüm stratejileriniz nelerdir?]`
-    * `Örnek: Belirli bir Python kütüphanesini öğrenmek zaman alabilir -> Çözüm: Kütüphane için ayrı bir öğrenme/deneme süresi planlamak.`
-    * `Örnek: Kullanıcı arayüzü tasarımında zorlanmak -> Çözüm: Benzer uygulamalardan ilham almak, basit wireframe'ler ile başlamak.`
+│   ├── config.py               # Yapılandırma dosyası
 
----
+│   │
 
-**9. Öğrenme Hedefleri (Kişisel Gelişim)**
-* `[Bu proje özelinde Python veya genel yazılım geliştirme ile ilgili olarak özellikle öğrenmeyi veya pekiştirmeyi hedeflediğiniz konular nelerdir?]`
-    * `Örnek: Asenkron programlama, belirli bir tasarım deseni (design pattern) uygulamak, etkili birim testleri yazmak, CI/CD temelleri vb.`
+│   ├── model/                  # Veri modeli sınıfları
+
+│   │   ├── user.py             # Kullanıcı modeli
+
+│   │   ├── game.py             # Oyun modeli
+
+│   │   ├── word.py             # Kelime modeli
+
+│   │   └── statistics.py       # İstatistik modeli
+
+│   │
+
+│   ├── view/                   # GUI dosyaları
+
+│   │   ├── login.py            # Giriş ekranı
+
+│   │   ├── registration.py     # Kayıt ekranı
+
+│   │   ├── main_window.py      # Ana menü
+
+│   │   ├── game_board.py       # Oyun tahtası
+
+│   │   ├── stats_view.py       # İstatistik ekranı
+
+│   │   └── settings.py         # Ayarlar ekranı
+
+│   │
+
+│   ├── controller/             # Kontrol mantığı
+
+│   │   ├── auth_controller.py  # Kimlik doğrulama kontrolcüsü
+
+│   │   ├── game_controller.py  # Oyun kontrolcüsü
+
+│   │   ├── bot_controller.py   # Bot kontrolcüsü
+
+│   │   └── stat_controller.py  # İstatistik kontrolcüsü
+
+│   │
+
+│   ├── db/                     # Veritabanı işlemleri
+
+│   │   ├── db_connector.py     # Veritabanı bağlantısı
+
+│   │   ├── user_repo.py        # Kullanıcı veritabanı işlemleri
+
+│   │   ├── word_repo.py        # Kelime veritabanı işlemleri
+
+│   │   └── game_repo.py        # Oyun veritabanı işlemleri
+
+│   │
+
+│   ├── bot/                    # Bot algoritmaları
+
+│   │   ├── entropy.py          # Entropy hesaplama
+
+│   │   ├── word_filter.py      # Kelime filtreleme
+
+│   │   └── suggestion.py       # Öneri algoritması
+
+│   │
+
+│   └── utils/                  # Yardımcı fonksiyonlar
+
+│       ├── validators.py       # Doğrulama fonksiyonları
+
+│       ├── email_service.py    # E-posta gönderme servisi
+
+│       ├── word_fetcher.py     # Kelime listesi getirme
+
+│       └── logger.py           # Loglama yardımcısı
+
+│
+
+├── tests/                      # Test dosyaları
+
+│   ├── test_game_logic.py
+
+│   ├── test_bot.py
+
+│   └── test_db.py
+
+│
+
+├── resources/                  # Kaynak dosyaları
+
+│   ├── styles/                 # CSS stilleri
+
+│   ├── images/                 # Görsel dosyalar
+
+│   ├── wordlists/              # Kelime listeleri
+
+│   └── ui/                     # Qt Designer UI dosyaları
+
+│
+
+├── docs/                       # Belgelendirme
+
+│   ├── api/                    # API belgelendirmesi
+
+│   └── user_guide/             # Kullanıcı kılavuzu
+
+│
+
+├── scripts/                    # Yardımcı scriptler
+
+│   ├── setup_db.py             # Veritabanı kurulum scripti
+
+│   └── word_importer.py        # Kelime içe aktarma scripti
+
+│
+
+├── .gitignore
+
+├── README.md
+
+├── requirements.txt            # Bağımlılıklar
+
+└── setup.py                    # Kurulum dosyası
+
+* **6.2. Mimari Yaklaşım:**
+    * MVC yaklaşımı benimsenecektir.
 
 ---
 
