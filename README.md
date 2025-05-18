@@ -264,4 +264,4 @@
 ---
 
 **10. Gelecek Geliştirmeler (Projenin İlk Versiyonu Sonrası İçin Fikirler)**
-* `[Projenin ilk versiyonu tamamlandıktan sonra eklemeyi düşünebileceğiniz veya hayal ettiğiniz ek özellikler, iyileştirmeler neler olabilir?]`
+* İlerleyen aşamalarda oyunweb üzerinden online bir şekilde oynanabilmesi için geliştirilebilir.
