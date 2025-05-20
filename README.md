@@ -106,15 +106,27 @@
     * **Veritabanı Sistemi:** MySQL
     * **Bağlantı Kütüphanesi:** mysql.connector
     * **Temel Veritabanı Şeması Fikirleri:**
-        * **Tablo 1: `[Tablo Adı (örn: Kullanicilar)]`**
-            * `[Sütun Adı 1 (örn: id)]`: `[Veri Tipi (örn: INT, PRIMARY KEY, AUTO_INCREMENT)]`
-            * `[Sütun Adı 2 (örn: kullanici_adi)]`: `[Veri Tipi (örn: VARCHAR(255), UNIQUE)]`
-            * `[Sütun Adı 3 (örn: sifre_hash)]`: `[Veri Tipi (örn: VARCHAR(255))]`
-            * `...`
-        * **Tablo 2: `[Tablo Adı]`**
-            * `[Sütunlar ve Veri Tipleri]`
-            * `...`
-        * `[Tablolar arası ilişkileri (foreign keys) burada belirtebilirsiniz.]`
+        * **Tablo 1: Users**
+            * Id
+            * Username
+            * Email
+            * Password
+        * **Tablo 2: Statistics**
+            * Id
+            * UserId (foreign key)
+            * Total Game Number
+            * Game Won Number
+            * Game Lose Number
+            * Avarage Score
+        * **Tablo 3: Words**
+            * Id
+            * Word
+        * **Tablo 4: Game**
+            * Id
+            * UserId (foreign key)
+            * WordId (foreign key)
+            * Score
+            * Win or Lose
 * **5.3. Geliştirme Araçları ve Ortamı:**
     * **IDE/Kod Editörü:** PyCharm
     * **Versiyon Kontrol Sistemi:** Git / GitHub
