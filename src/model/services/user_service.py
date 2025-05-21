@@ -4,8 +4,11 @@ from src.model.entites.users import User
 import bcrypt
 
 class UserService:
-    def __init__(self):
-        self._user_repository = UserRepository()
+    def __init__(self, user_repo: Optional[UserRepository] = None):
+        if user_repo is None:
+            self._user_repo = UserRepository()
+        else:
+            self._user_repository = user_repo
 
     def _hash_password(self, password : str) -> str:
         salt = bcrypt.gensalt() # rastgele bir salt oluşturur
@@ -35,7 +38,7 @@ class UserService:
                 return None, str(ve)
 
             if self._user_repository.get_user_by_email(email):
-                return None, "Bu kullanıcı zaten kayıtlı"
+                return None, "Bu e-posta adresi zaten kayıtlı."
             elif self._user_repository.get_user_by_username(user_name):
                 return None, "Bu kullanıcı zaten kayıtlı"
 

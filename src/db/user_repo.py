@@ -7,12 +7,12 @@ class UserRepository:
     def __init__(self):
         self._db_connector = DBConnector()
 
-    def create_user(self, user: User) -> bool:
+    def create_user(self, user: User) -> int:
         query = "INSERT INTO users (user_name, email, password_hash) VALUES (%s, %s, %s)"
         params = (user.user_name, user.email, user.password)
 
         result = self._db_connector.execute_query(query, params)
-        return result is not None
+        return result
 
     def get_user_by_username(self, user_name : str) -> Optional[User]:
         query = "SELECT * FROM users WHERE user_name = %s"
