@@ -3,6 +3,7 @@ class ErrorMessages:
     USERNAME_ALREADY_EXISTS = "Bu kullanıcı adı zaten kullanılıyor"
     INVALID_EMAIL_FORMAT = "Geçersiz email formatı girdiniz"
 
+
     @staticmethod
     def create_operation_error(entity_name: str) -> str:
         return f"{entity_name} oluşturulurken bir veritabanı hatası oluştu!"
@@ -23,3 +24,12 @@ class ErrorMessages:
     @staticmethod
     def password_too_short(password_length: int) -> str:
         return f"Girilen şifre {password_length}'den uzun olmalıdır"
+    @staticmethod
+    def delete_operation_entity_could_not_be_found(entity_name: str) -> str:
+        return f"Böyle bir {entity_name} bulunamadı!"
+    @staticmethod
+    def delete_operation_error(entity_name: str) -> str:
+        return f"{entity_name} silinirken bir veritabanı hatası oluştu"
+    @staticmethod
+    def update_operation_entity_could_not_be_found(entity_name: str) -> str:
+        return f"Böyle bir {entity_name} veritabanına kayıtlı değildir!"

@@ -1,13 +1,15 @@
 import re
 from typing import Optional
 
+from src.utilits.error_messages import ErrorMessages
+
 
 class User:
-    def __init__(self, id: Optional[int], user_name: str, email: str, password: str):
+    def __init__(self, id: Optional[int], user_name: str, email: str, password_hash: str):
         self._id = id
         self.user_name = user_name
-        self._email = email
-        self.password = password
+        self.email = email
+        self.password_hash = password_hash
 
     @property
     def id(self) -> int:
@@ -22,7 +24,7 @@ class User:
         if self.is_valid_email(value):
             self._email = value
         else:
-            raise ValueError("Invalid email")
+            raise ValueError(ErrorMessages.INVALID_EMAIL_FORMAT)
 
     @staticmethod
     def is_valid_email(email: str) -> bool:
