@@ -3,6 +3,8 @@ import pytest
 from src.db.user_repo import UserRepository
 from src.model.entites.users import User
 from src.model.services.user_service import UserService
+from src.utilits.error_messages import ErrorMessages
+
 
 class TestUserService:
 
@@ -54,7 +56,7 @@ class TestUserService:
         created_user, error_message = service.register_user(user_name="user1", email="email123@gmail.com",password="password123")
 
         assert created_user is None
-        assert error_message == "Bu e-posta adresi zaten kayıtlı."
+        assert error_message == ErrorMessages.EMAIL_ALREADY_EXISTS
 
         mock_repo.create_user.assert_not_called()
         mock_repo.get_user_by_email.assert_called_once_with("email123@gmail.com")
