@@ -3,6 +3,9 @@ from src.db.user_repo import UserRepository
 from src.model.entites.users import User
 import bcrypt
 
+from src.utilits.error_messages import ErrorMessages
+
+
 class UserService:
     def __init__(self, user_repo: Optional[UserRepository] = None):
         if user_repo is None:
@@ -21,14 +24,14 @@ class UserService:
         :param user_name:
         :param password:
         :param email:
-        :return: Başarılı olursa User nesnesini döner, başarısız olur ise None döner
+        :return: Başarılı olursa User nesnesini döner, başarısız olur ise None ve hata mesajı döner
         """
 
         try:
             if not user_name or not password or not email:
-                return None, "Kulanıcı adı, e-posta ve şifre alanları dolu olmalıdır."
+                return None, ErrorMessages.fields_cannot_be_empty(["user_name", "password", "email"])
             if len(password) < 6:
-                return None, "Şifre en az 6 karakter uzunluğunda olmalıdır."
+                return None, ErrorMessages.password_too_short(6)
 
 
             try:
@@ -38,9 +41,9 @@ class UserService:
                 return None, str(ve)
 
             if self._user_repository.get_user_by_email(email):
-                return None, "Bu e-posta adresi zaten kayıtlı."
+                return None, ErrorMessages.EMAIL_ALREADY_EXISTS
             elif self._user_repository.get_user_by_username(user_name):
-                return None, "Bu kullanıcı zaten kayıtlı"
+                return None, ErrorMessages.USERNAME_ALREADY_EXISTS
 
             hashed_password = self._hash_password(password)
 
@@ -50,13 +53,13 @@ class UserService:
             if new_user_id:
                 return User(id=new_user_id, user_name=user_name, email=email, password=hashed_password), None
             else:
-                return None, "Kullanıcı oluşturulurken bir veritabanı hatası oluştu!"
+                return None, ErrorMessages.create_operation_error("User")
 
         except ValueError as ve:
             return None, str(ve)
         except Exception as e:
-            print(f"UserService.register_user genel hata: {e}")
-            return None, "Beklenmedik bir hata oluştu!"
+            print(f"UserService.register_user: Genel hata: {e}")
+            return None, ErrorMessages.create_operation_unexpected_error("User")
 
 
 

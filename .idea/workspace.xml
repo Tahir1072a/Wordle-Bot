@@ -6,8 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4a057bae-2e3e-43d6-b64b-893820d4b91c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/user_services.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utilits/error_messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/utilits/error_messages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/services/user_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/services/user_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/services/user_service_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/services/user_service_test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,24 +33,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.db_connector.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.user_repo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.users.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;i__#6&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tahir/PycharmProjects/Wordle_Game/src/main.py&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.db_connector.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.user_repo.executor": "Run",
+    "Python.users.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "i__#11",
+    "last_opened_file_path": "C:/Users/tahir/PycharmProjects/Wordle_Game/src/main.py",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\tahir\PycharmProjects\Wordle_Game\src" />
@@ -104,7 +104,7 @@
       <workItem from="1747365521615" duration="26000" />
       <workItem from="1747755418615" duration="6551000" />
       <workItem from="1747805889835" duration="14392000" />
-      <workItem from="1747835003835" duration="813000" />
+      <workItem from="1747835003835" duration="1186000" />
     </task>
     <servers />
   </component>
