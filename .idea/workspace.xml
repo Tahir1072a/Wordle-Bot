@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a057bae-2e3e-43d6-b64b-893820d4b91c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controller/user_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/db/user_repo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/entites/users.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/services/user_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/user_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/db/db_connector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/db/db_connector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,10 +40,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.db_connector.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.user_repo.executor": "Run",
+    "Python.users.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "i__#6",
-    "last_opened_file_path": "C:/Users/tahir/PycharmProjects/Wordle_Game",
+    "last_opened_file_path": "C:/Users/tahir/PycharmProjects/Wordle_Game/src/main.py",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -47,8 +58,35 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tahir\PycharmProjects\Wordle_Game\src\model\entites" />
       <recent name="C:\Users\tahir\PycharmProjects\Wordle_Game" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python">
+      <module name="Wordle_Game" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="wordle_game" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -68,11 +106,21 @@
       <updated>1747321856071</updated>
       <workItem from="1747321857350" duration="645000" />
       <workItem from="1747365521615" duration="26000" />
-      <workItem from="1747755418615" duration="3932000" />
+      <workItem from="1747755418615" duration="6551000" />
+      <workItem from="1747805889835" duration="6331000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Wordle_Game$user_repo.coverage" NAME="user_repo Coverage Results" MODIFIED="1747811402126" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/db" />
+    <SUITE FILE_PATH="coverage/Wordle_Game$users.coverage" NAME="users Coverage Results" MODIFIED="1747811206501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/model/entites" />
+    <SUITE FILE_PATH="coverage/Wordle_Game$db_connector.coverage" NAME="db_connector Coverage Results" MODIFIED="1747764055784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/db" />
+    <SUITE FILE_PATH="coverage/Wordle_Game$main.coverage" NAME="main Coverage Results" MODIFIED="1747811889916" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
