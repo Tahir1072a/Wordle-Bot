@@ -9,7 +9,7 @@ from src.utilits.error_messages import ErrorMessages
 class UserService:
     def __init__(self, user_repo: Optional[UserRepository] = None):
         if user_repo is None:
-            self._user_repo = UserRepository()
+            self._user_repository = UserRepository()
         else:
             self._user_repository = user_repo
 
@@ -33,10 +33,9 @@ class UserService:
             if len(password) < 6:
                 return None, ErrorMessages.password_too_short(6)
 
-
             try:
                 if not User.is_valid_email(email):
-                    raise ValueError("Geçersiz e posta formatı.")
+                    raise ValueError(ErrorMessages.INVALID_EMAIL_FORMAT)
             except ValueError as ve:
                 return None, str(ve)
 
@@ -47,11 +46,11 @@ class UserService:
 
             hashed_password = self._hash_password(password)
 
-            new_user = User(id=None, user_name=user_name, password=hashed_password, email=email)
+            new_user = User(id=None, user_name=user_name, password_hash=hashed_password, email=email)
             new_user_id = self._user_repository.create_user(new_user)
 
             if new_user_id:
-                return User(id=new_user_id, user_name=user_name, email=email, password=hashed_password), None
+                return User(id=new_user_id, user_name=user_name, email=email, password_hash=hashed_password), None
             else:
                 return None, ErrorMessages.create_operation_error("User")
 
@@ -59,8 +58,65 @@ class UserService:
             return None, str(ve)
         except Exception as e:
             print(f"UserService.register_user: Genel hata: {e}")
-            return None, ErrorMessages.create_operation_unexpected_error("User")
+            return None, ErrorMessages.create_operation_unexpected_error("kullanıcı")
 
+    def delete_user(self, value) -> Tuple[bool, Optional[str]]:
+        user = None
 
+        if isinstance(value, User):
+            user = self._user_repository.get_user_by_id(value.id)
+            if user is None:
+                return False, ErrorMessages.delete_operation_entity_could_not_be_found("kullanıcı")
+        elif isinstance(value, str):
+            if User.is_valid_email(value):
+                user = self._user_repository.get_user_by_email(value)
+                if user is None:
+                    return False, ErrorMessages.delete_operation_entity_could_not_be_found("kullanıcı")
+            else:
+                user = self._user_repository.get_user_by_username(value)
+                if user is None:
+                    return False, ErrorMessages.delete_operation_entity_could_not_be_found("kullanıcı")
+        elif isinstance(value, int):
+            user = self._user_repository.get_user_by_id(value)
+            if user is None:
+                return False, ErrorMessages.delete_operation_entity_could_not_be_found("kullanıcı")
 
+        result = self._user_repository.delete_user(user.id)
 
+        if result:
+            return True, None
+        else:
+            return False, ErrorMessages.delete_operation_error("kullanıcı")
+
+    def update_user(self, user_id: int, user_name: str, email: str, password: str) -> Tuple[bool, Optional[str]]:
+
+        if user_id is None or user_name is None or email is None or password is  None:
+            return False, ErrorMessages.fields_cannot_be_empty(["user_id", "user_name", "email", "password"])
+
+        if self._user_repository.get_user_by_username(user_name):
+            return False, ErrorMessages.USERNAME_ALREADY_EXISTS
+        elif self._user_repository.get_user_by_email(email):
+            return False, ErrorMessages.EMAIL_ALREADY_EXISTS
+
+        updated_user = self._user_repository.get_user_by_id(user_id)
+        if not updated_user:
+            return False, ErrorMessages.update_operation_entity_could_not_be_found("kullanıcı")
+
+        try:
+            user = User(id=user_id, user_name=user_name, password_hash=self._hash_password(password), email=email)
+        except ValueError as ve:
+            return False, str(ve)
+
+        result = self._user_repository.update_user(user)
+        return result, None
+
+    def get_user_by_id(self, user_id: int) -> Tuple[Optional[User], Optional[str]]:
+
+        if not user_id:
+            return None, ErrorMessages.fields_cannot_be_empty(["user_id"])
+
+        user = self._user_repository.get_user_by_id(user_id)
+        if not user:
+            return None, ErrorMessages.delete_operation_entity_could_not_be_found("kullanıcı")
+
+        return user, None
