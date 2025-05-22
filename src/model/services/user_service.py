@@ -1,5 +1,8 @@
 from typing import Tuple, Optional
-from src.db.user_repo import UserRepository
+
+from src.db.abstract.AUserRepository import AUserRepository
+from src.db.abstract.AWordRepository import AWordRepository
+from src.db.concrete.user_repo import UserRepository
 from src.model.entites.users import User
 import bcrypt
 
@@ -7,7 +10,7 @@ from src.utilits.error_messages import ErrorMessages
 
 
 class UserService:
-    def __init__(self, user_repo: Optional[UserRepository] = None):
+    def __init__(self, user_repo: Optional[AWordRepository] = None):
         if user_repo is None:
             self._user_repository = UserRepository()
         else:
@@ -47,7 +50,7 @@ class UserService:
             hashed_password = self._hash_password(password)
 
             new_user = User(id=None, user_name=user_name, password_hash=hashed_password, email=email)
-            new_user_id = self._user_repository.create_user(new_user)
+            new_user_id = self._user_repository.create(new_user)
 
             if new_user_id:
                 return User(id=new_user_id, user_name=user_name, email=email, password_hash=hashed_password), None
@@ -81,7 +84,7 @@ class UserService:
             if user is None:
                 return False, ErrorMessages.delete_operation_entity_could_not_be_found("kullanıcı")
 
-        result = self._user_repository.delete_user(user.id)
+        result = self._user_repository.delete(user.id)
 
         if result:
             return True, None
@@ -107,7 +110,7 @@ class UserService:
         except ValueError as ve:
             return False, str(ve)
 
-        result = self._user_repository.update_user(user)
+        result = self._user_repository.update(user)
         return result, None
 
     def get_user_by_id(self, user_id: int) -> Tuple[Optional[User], Optional[str]]:

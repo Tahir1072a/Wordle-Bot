@@ -1,6 +1,6 @@
 import pytest
 
-from src.db.user_repo import UserRepository
+from src.db.concrete.user_repo import UserRepository
 from src.model.entites.users import User
 from src.model.services.user_service import UserService
 from src.utilits.error_messages import ErrorMessages
@@ -26,7 +26,7 @@ class TestUserService:
 
         mock_repo.get_user_by_email.return_value = None
         mock_repo.get_user_by_username.return_value = None
-        mock_repo.create_user.return_value = 1
+        mock_repo.create.return_value = 1
 
         mocker.patch.object(UserService, '_hash_password', return_value='mocked_hash')
 
@@ -41,7 +41,7 @@ class TestUserService:
 
         mock_repo.get_user_by_username.assert_called_once_with("testuser")
         mock_repo.get_user_by_email.assert_called_once_with("testuser@gmail.com")
-        mock_repo.create_user.assert_called_once()
+        mock_repo.create.assert_called_once()
 
     def test_register_user_already_exists_email(self, user_service_with_mock_repo):
         # Arrange
@@ -58,7 +58,7 @@ class TestUserService:
         assert created_user is None
         assert error_message == ErrorMessages.EMAIL_ALREADY_EXISTS
 
-        mock_repo.create_user.assert_not_called()
+        mock_repo.create.assert_not_called()
         mock_repo.get_user_by_email.assert_called_once_with("email123@gmail.com")
 
     def test_register_user_already_exists_username(self, user_service_with_mock_repo):
@@ -74,7 +74,7 @@ class TestUserService:
         assert created_user is None
         assert error_message == ErrorMessages.USERNAME_ALREADY_EXISTS
 
-        mock_repo.create_user.assert_not_called()
+        mock_repo.create.assert_not_called()
         mock_repo.get_user_by_username.assert_called_once_with(existing_user_mock.user_name)
 
     def test_register_user_email_format_error(self, user_service_with_mock_repo):
@@ -94,14 +94,14 @@ class TestUserService:
         existing_user = User(id=99, user_name="user1", password_hash="password123", email="email123@gmail.com")
         mock_repo.get_user_by_id.return_value = existing_user
 
-        mock_repo.delete_user.return_value = True
+        mock_repo.delete.return_value = True
 
         result, error_message = service.delete_user(existing_user.id)
 
         assert result is True
         assert error_message is None
 
-        mock_repo.delete_user.assert_called_once_with(existing_user.id)
+        mock_repo.delete.assert_called_once_with(existing_user.id)
         mock_repo.get_user_by_id.assert_called_once_with(existing_user.id)
 
     def test_delete_user_by_email_successful(self, user_service_with_mock_repo):
@@ -111,14 +111,14 @@ class TestUserService:
         existing_user = User(id=99, user_name="user1", password_hash="password123", email="email123@gmail.com")
         mock_repo.get_user_by_email.return_value = existing_user
 
-        mock_repo.delete_user.return_value = True
+        mock_repo.delete.return_value = True
 
         result, error_message = service.delete_user(existing_user.email)
 
         assert result is True
         assert error_message is None
 
-        mock_repo.delete_user.assert_called_once_with(existing_user.id)
+        mock_repo.delete.assert_called_once_with(existing_user.id)
         mock_repo.get_user_by_email.assert_called_once_with(existing_user.email)
 
     def test_delete_user_by_username_successful(self, user_service_with_mock_repo):
@@ -128,14 +128,14 @@ class TestUserService:
         existing_user = User(id=99, user_name="user1", password_hash="password123", email="email123@gmail.com")
         mock_repo.get_user_by_username.return_value = existing_user
 
-        mock_repo.delete_user.return_value = True
+        mock_repo.delete.return_value = True
 
         result, error_message = service.delete_user(existing_user.user_name)
 
         assert result is True
         assert error_message is None
 
-        mock_repo.delete_user.assert_called_once_with(existing_user.id)
+        mock_repo.delete.assert_called_once_with(existing_user.id)
         mock_repo.get_user_by_username.assert_called_once_with(existing_user.user_name)
 
     def test_delete_user_by_user_successful(self, user_service_with_mock_repo):
@@ -145,14 +145,14 @@ class TestUserService:
         existing_user = User(id=99, user_name="user1", password_hash="password123", email="email123@gmail.com")
         mock_repo.get_user_by_id.return_value = existing_user
 
-        mock_repo.delete_user.return_value = True
+        mock_repo.delete.return_value = True
 
         result, error_message = service.delete_user(existing_user)
 
         assert result is True
         assert error_message is None
 
-        mock_repo.delete_user.assert_called_once_with(existing_user.id)
+        mock_repo.delete.assert_called_once_with(existing_user.id)
         mock_repo.get_user_by_id.assert_called_once_with(existing_user.id)
 
     def test_delete_user_by_id_not_found_error(self, user_service_with_mock_repo):
@@ -214,7 +214,7 @@ class TestUserService:
         updated_user = User(id=99, user_name="user1", password_hash="password123", email="email123@gmail.com")
 
         mock_repo.get_user_by_id.return_value = updated_user
-        mock_repo.update_user.return_value = True
+        mock_repo.update.return_value = True
         mock_repo.get_user_by_username.return_value = None
         mock_repo.get_user_by_email.return_value = None
 
@@ -224,7 +224,7 @@ class TestUserService:
         assert error_message is None
 
         mock_repo.get_user_by_id.assert_called_once_with(updated_user.id)
-        mock_repo.update_user.assert_called_once()
+        mock_repo.update.assert_called_once()
 
     def test_update_user_empty_fields_error(self, user_service_with_mock_repo):
         service = user_service_with_mock_repo
@@ -235,7 +235,7 @@ class TestUserService:
         assert result is False
         assert error_message == ErrorMessages.fields_cannot_be_empty(["user_id", "user_name", "email", "password"])
 
-        mock_repo.update_user.assert_not_called()
+        mock_repo.update.assert_not_called()
 
     def test_update_user_not_found_error(self, user_service_with_mock_repo):
         service = user_service_with_mock_repo
@@ -253,7 +253,7 @@ class TestUserService:
         assert error_message == ErrorMessages.update_operation_entity_could_not_be_found("kullanıcı")
 
         mock_repo.get_user_by_id.assert_called_once_with(updated_user.id)
-        mock_repo.update_user.assert_not_called()
+        mock_repo.update.assert_not_called()
 
     def test_update_user_email_format_error(self, user_service_with_mock_repo):
         service = user_service_with_mock_repo
@@ -271,7 +271,7 @@ class TestUserService:
         assert result is False
         assert error_message == ErrorMessages.INVALID_EMAIL_FORMAT
 
-        mock_repo.update_user.assert_not_called()
+        mock_repo.update.assert_not_called()
         mock_repo.get_user_by_id.assert_called_once_with(updated_user.id)
 
     def test_update_user_username_already_exists_error(self, user_service_with_mock_repo):
@@ -286,7 +286,7 @@ class TestUserService:
         assert result is False
         assert error_message == ErrorMessages.USERNAME_ALREADY_EXISTS
 
-        mock_repo.update_user.assert_not_called()
+        mock_repo.update.assert_not_called()
         mock_repo.get_user_by_username.assert_called_once_with(updated_user.user_name)
 
     def test_update_user_email_already_exists_error(self, user_service_with_mock_repo):
@@ -303,7 +303,7 @@ class TestUserService:
         assert result is False
         assert error_message == ErrorMessages.EMAIL_ALREADY_EXISTS
 
-        mock_repo.update_user.assert_not_called()
+        mock_repo.update.assert_not_called()
         mock_repo.get_user_by_username.assert_called_once_with(updated_user.user_name)
         mock_repo.get_user_by_email.assert_called_once_with(updated_user.email)
 
